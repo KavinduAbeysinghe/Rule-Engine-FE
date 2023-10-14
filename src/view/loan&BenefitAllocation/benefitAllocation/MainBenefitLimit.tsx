@@ -1,11 +1,11 @@
 import {Accordion, AccordionDetails, AccordionSummary, Box, Button, Grid, IconButton} from "@mui/material";
-import FormTextField from "../../components/inputs/FormTextField";
+import FormTextField from "../../../components/inputs/FormTextField";
 import {useEffect, useState} from "react";
 import ClearIcon from '@mui/icons-material/Clear';
-import {useNotification} from "../../context/NotificationContext";
-import {axiosInstance} from "../../api/store";
+import {useNotification} from "../../../context/NotificationContext";
+import {axiosInstance} from "../../../api/store";
 import {useFieldArray} from "react-hook-form";
-import FormAutoCompleteField from "../../components/inputs/FormAutoCompleteField";
+import FormAutoCompleteField from "../../../components/inputs/FormAutoCompleteField";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SubBenefitLimitAllocation from "./SubBenefitLimitAllocation";
 
@@ -18,6 +18,7 @@ interface MainBenefitLimitProps {
     mainBenefits: any;
     mainBenefitIndex: number;
     removeMainBenefitLimit: any;
+    getValues: any;
 }
 
 const MainBenefitLimit = ({
@@ -28,7 +29,8 @@ const MainBenefitLimit = ({
                               mainBenefits,
                               mainBenefitId,
                               mainBenefitIndex,
-                              removeMainBenefitLimit
+                              removeMainBenefitLimit,
+                              getValues
                           }: MainBenefitLimitProps) => {
 
     const notify = useNotification();
@@ -48,7 +50,10 @@ const MainBenefitLimit = ({
         removeMainBenefitLimit(mainBenefitIndex);
     }
 
-    const {fields, prepend, remove} = useFieldArray({control, name: `mainBenefitLimits.${mainBenefitIndex}.subBenefitLimits`});
+    const {fields, prepend, remove} = useFieldArray({
+        control,
+        name: `mainBenefitLimits.${mainBenefitIndex}.subBenefitLimits`
+    });
 
     const getAllSubBenefits = async () => {
         if (!!mainBenefitId) {
@@ -76,6 +81,7 @@ const MainBenefitLimit = ({
 
     const handleAddSubBenefit = () => {
         if (!!subBenefit) {
+            // const item = setBenfits?.find((c: any) => c?.value === subBenefit);
             const dupSubBenefit = fields?.find((b: any) => b?.subBenefitId === subBenefit);
             if (!dupSubBenefit) {
                 prepend({
@@ -89,14 +95,16 @@ const MainBenefitLimit = ({
                 setValue(`mainBenefitLimits.${mainBenefitIndex}.subBenefit`, "");
                 notify.warn("Sub benefit already exists");
             }
+        } else {
+            return;
         }
     }
 
     return (
-        <Box sx={{mt:2}}>
+        <Box sx={{mt: 2}}>
             <Accordion>
                 <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
+                    expandIcon={<ExpandMoreIcon/>}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                 >
@@ -112,7 +120,7 @@ const MainBenefitLimit = ({
                                 type={"text"}
                                 disabled={true}/>
                         </Grid>
-                        <Grid item md={3}>
+                        <Grid item md={5}>
                             <FormTextField
                                 register={register(`mainBenefitLimits.${mainBenefitIndex}.mainBenefitName`)}
                                 required={false}
@@ -132,10 +140,10 @@ const MainBenefitLimit = ({
                                 error={false}
                                 helperText={""}
                                 type={"number"}
-                                inputProps={{min:0}}
+                                inputProps={{min: 0}}
                                 disabled={false}/>
                         </Grid>
-                        <Grid item md={3}>
+                        <Grid item md={1}>
                             <IconButton onClick={handleRemoveMBL}>
                                 <ClearIcon color={"error"}/>
                             </IconButton>
@@ -168,7 +176,7 @@ const MainBenefitLimit = ({
                             control={control}
                             setValue={setValue}
                             watch={watch}
-                            subBenefitId={field.subBenefit}
+                            subBenefitId={field.subBenefitId}
                             subBenefits={setBenfits}
                             subBenefitIndex={`mainBenefitLimits.${mainBenefitIndex}.subBenefitLimits.${index}`}
                             removeSubBenefitLimit={remove}/>

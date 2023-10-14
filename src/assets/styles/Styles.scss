@@ -1,0 +1,98 @@
+@import "Colors.scss";
+
+.landing-heading {
+  color: $heading-color;
+}
+
+.MuiFormControl-root.MuiTextField-root.MuiInputBase-input.Mui-disabled {
+  color: black !important;
+  -webkit-text-fill-color: black !important;
+}
+
+.MuiInputBase-input.MuiOutlinedInput-input.Mui-disabled {
+  color: #424242 !important;
+  -webkit-text-fill-color: black !important;
+}
+
+.MuiFormLabel-root.MuiInputLabel-root.Mui-disabled {
+  color: black !important;
+  -webkit-text-fill-color: black !important;
+}
+
+.MuiFormLabel-root.MuiInputLabel-root {
+  color: black !important;
+  -webkit-text-fill-color: black !important;
+}
+
+.navbar.bg-body-tertiary {
+  box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px !important;
+  background-color: white !important;
+
+  .navbar-brand {
+    color: $heading-color !important;
+  }
+
+  .nav-link {
+    cursor: pointer;
+  }
+}
+
+.MuiPaper-root.MuiDrawer-paper {
+  background: linear-gradient(195deg, #42424a, #191919);
+  //margin: 1rem;
+  //border-radius: 17px;
+  //height: calc(100vh - 2rem);
+}
+
+.MuiPaper-root.MuiAccordion-root {
+  //background-color: #f0f0ff !important;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px !important;
+}
+
+//.footer {
+//  background: rgba( 128, 128, 128, 0.45 );
+//  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+//  backdrop-filter: blur( 2.5px );
+//  -webkit-backdrop-filter: blur( 2.5px );
+//  border-radius: 10px;
+//  border: 1px solid rgba( 255, 255, 255, 0.18 );
+//}
+
+.divider {
+  flex-shrink: 0;
+  border-top: 0px solid rgba(0, 0, 0, 0.08);
+  border-right: 0px solid rgba(0, 0, 0, 0.08);
+  border-left: 0px solid rgba(0, 0, 0, 0.08);
+  height: 0.0625rem;
+  margin: 1rem 0px;
+  border-bottom: none;
+  opacity: 0.25;
+  background-color: transparent;
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    rgb(255, 255, 255),
+    rgba(255, 255, 255, 0)
+  ) !important;
+}
+
+.nav-button {
+  opacity: 1;
+  background: linear-gradient(195deg, rgb(73, 163, 241), rgb(26, 115, 232));
+  color: rgb(255, 255, 255);
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  width: 100%;
+  padding: 0.5rem 0.625rem;
+  margin: 0.09375rem 1rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  box-shadow: rgba(0, 0, 0, 0.1) 0rem 0.25rem 0.375rem -0.0625rem, rgba(0, 0, 0, 0.06) 0rem 0.125rem 0.25rem -0.0625rem;
+}
+
+.accordion, .MuiPaper-root.MuiCard-root {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px !important;
+}

@@ -1,5 +1,5 @@
 import {Grid, IconButton} from "@mui/material";
-import FormTextField from "../../components/inputs/FormTextField";
+import FormTextField from "../../../components/inputs/FormTextField";
 import ClearIcon from "@mui/icons-material/Clear";
 import { useEffect } from "react";
 
@@ -39,7 +39,7 @@ const SubBenefitLimitAllocation = ({register, control, setValue, watch, subBenef
                     type={"text"}
                     disabled={true}/>
             </Grid>
-            <Grid item md={3}>
+            <Grid item md={4.7}>
                 <FormTextField
                     register={register(`${subBenefitIndex}.subBenefitName`)}
                     required={false}
@@ -62,7 +62,7 @@ const SubBenefitLimitAllocation = ({register, control, setValue, watch, subBenef
                     inputProps={{min:0}}
                     disabled={false}/>
             </Grid>
-            <Grid item md={3}>
+            <Grid item md={1}>
                 <IconButton onClick={handleRemoveSBL}>
                     <ClearIcon color={"error"}/>
                 </IconButton>
