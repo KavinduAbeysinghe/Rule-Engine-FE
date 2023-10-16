@@ -198,6 +198,7 @@ const BenefitAllocation = ({
             control={control}
             setValue={setValue}
             watch={watch}
+            disabled={!categoryId}
           />
         </Grid>
         <Grid item md={2}>
@@ -205,6 +206,7 @@ const BenefitAllocation = ({
             variant={"outlined"}
             size={"small"}
             onClick={handleAddMainCat}
+            disabled={!categoryId}
           >
             Add
           </Button>
@@ -225,13 +227,19 @@ const BenefitAllocation = ({
         />
       ))}
       <Box display={"flex"} gap={2} sx={{ mt: 5 }} justifyContent={"center"}>
-        <Button variant={"outlined"} size={"small"} onClick={clearData}>
+        <Button
+          variant={"outlined"}
+          size={"small"}
+          onClick={clearData}
+          disabled={!categoryId}
+        >
           Clear
         </Button>
         <Button
           variant={"contained"}
           size={"small"}
           onClick={handleSubmit(onSubmit)}
+          disabled={!categoryId}
         >
           Save
         </Button>

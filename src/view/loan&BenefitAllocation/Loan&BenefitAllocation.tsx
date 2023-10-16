@@ -9,6 +9,7 @@ import CustomAccordion from "../../components/accordion/CustomAccordion";
 import { Backdrop, Box, CircularProgress, Grid } from "@mui/material";
 import LoanAllocation from "./loanAllocation/LoanAllocation";
 import BenefitAllocation from "./benefitAllocation/BenefitAllocation";
+import Typography from "@mui/material/Typography";
 
 const LoanBenefitAllocation = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -107,7 +108,10 @@ const LoanBenefitAllocation = () => {
       </Backdrop>
       <h2>Loan & Benefit Allocation</h2>
       <hr />
-      <Grid container mt={5}>
+      <Typography mt={5}>
+        Select a customer category to allocate loans & benfits{" "}
+      </Typography>
+      <Grid container mt={2}>
         <Grid item xs={12} sm={8} md={6}>
           <FormAutoCompleteField
             options={customerCatOptions}

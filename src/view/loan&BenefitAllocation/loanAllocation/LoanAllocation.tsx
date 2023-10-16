@@ -10,6 +10,7 @@ import {
 import CustomModal from "../../../components/modal/CustomModal";
 import LoanAllocationForm from "./LoanAllocationForm";
 import AlertDialogSlide from "../../../components/modal/AlertDialog";
+import AddIcon from "@mui/icons-material/Add";
 
 interface LoanAllocationProps {
   notify: any;
@@ -167,8 +168,9 @@ const LoanAllocation = ({
         size={"small"}
         onClick={handleNavigateCreate}
         sx={{ mt: 2, mb: 3 }}
+        endIcon={<AddIcon />}
       >
-        Create Loan
+        Create
       </Button>
       <SearchTable
         tableData={loanTableData}

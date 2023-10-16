@@ -70,10 +70,7 @@ const Sidebar = () => {
           />
           <Typography sx={{ color: "white" }}>SRB Bank</Typography>
         </Box>
-        <hr
-          style={{ color: "gray", marginLeft: 10, marginRight: 10 }}
-          className={"divider"}
-        />
+        <hr style={{ marginLeft: 10, marginRight: 10 }} className={"divider"} />
         <List>
           {navList.map((nav: any, index) => (
             <ListItem

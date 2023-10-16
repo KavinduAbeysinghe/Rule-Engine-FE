@@ -206,6 +206,9 @@ const CustomerCategoryForm = ({
           helperText={errors?.income?.message?.toString()}
           type={"number"}
           inputProps={{ min: 0 }}
+          InputProps={{
+            startAdornment: "Rs. ",
+          }}
           disabled={isView}
         />
         <FormSwitchField

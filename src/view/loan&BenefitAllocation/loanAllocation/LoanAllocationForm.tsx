@@ -303,6 +303,9 @@ const LoanAllocationForm = ({
             helperText={errors?.loanAmount?.message?.toString()}
             type={"number"}
             disabled={isView || !isLoanLimitApplicableW}
+            InputProps={{
+              startAdornment: "Rs. ",
+            }}
           />
         </Box>
         <Box display={"flex"} gap={2}>
@@ -377,6 +380,9 @@ const LoanAllocationForm = ({
             type={"number"}
             inputProps={{ min: 0 }}
             disabled={isView || !isInterestRateApplicableW}
+            InputProps={{
+              endAdornment: "%",
+            }}
           />
         </Box>
         <Box display={"flex"} gap={2}>
