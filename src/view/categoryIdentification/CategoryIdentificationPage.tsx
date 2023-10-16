@@ -172,7 +172,7 @@ const CategoryIdentificationPage = () => {
       <h2 className={"landing-heading"}>Category Identification</h2>
       <hr />
       <Grid container spacing={2} mt={5}>
-        <Grid item sm={6} md={3}>
+        <Grid item sm={6} md={3} lg={2}>
           <FormTextField
             label={"Credit Score"}
             register={register("creditScore")}
@@ -184,7 +184,7 @@ const CategoryIdentificationPage = () => {
             inputProps={{ min: 0 }}
           />
         </Grid>
-        <Grid item sm={6} md={3}>
+        <Grid item sm={6} md={3} lg={2}>
           <FormTextField
             label={"Income"}
             register={register("income")}
@@ -199,7 +199,7 @@ const CategoryIdentificationPage = () => {
             }}
           />
         </Grid>
-        <Grid item sm={6} md={2}>
+        <Grid item sm={6} md={2} lg={2}>
           <FormSwitchField
             name={"isAgeGreaterThan18"}
             label={"Age Greater Than 18"}
@@ -210,7 +210,7 @@ const CategoryIdentificationPage = () => {
             setValue={() => setValue}
           />
         </Grid>
-        <Grid item sm={6} md={2}>
+        <Grid item sm={6} md={2} lg={2}>
           <FormSwitchField
             name={"isSpecializedCustomer"}
             label={"Specialized Customer"}

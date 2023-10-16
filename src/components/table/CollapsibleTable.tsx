@@ -104,14 +104,14 @@ function Row({ row, bottomColumnHeaders, bottomTableKey }: RowProps) {
                   </TableBody>
                 ) : (
                   <TableBody>
-                    <StyledTableRow>
+                    <StyledTableRow2>
                       <StyledTableCell
                         align={"center"}
                         colSpan={bottomColumnHeaders.length + 1}
                       >
                         No Data to Display
                       </StyledTableCell>
-                    </StyledTableRow>
+                    </StyledTableRow2>
                   </TableBody>
                 )}
               </Table>

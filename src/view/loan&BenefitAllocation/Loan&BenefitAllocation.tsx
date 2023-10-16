@@ -64,12 +64,6 @@ const LoanBenefitAllocation = () => {
 
   const catId = watch("customerCategory");
 
-  useEffect(() => {
-    if (!!catId) {
-      console.log(catId);
-    }
-  }, [catId]);
-
   const accordionItems = [
     {
       header: "Loan Allocation",
@@ -106,13 +100,13 @@ const LoanBenefitAllocation = () => {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
-      <h2>Loan & Benefit Allocation</h2>
+      <h2 className={"landing-heading"}>Loan & Benefit Allocation</h2>
       <hr />
-      <Typography mt={5}>
-        Select a customer category to allocate loans & benfits{" "}
+      <Typography mt={5} className={"landing-heading"}>
+        Select a customer category to allocate loans & benefits{" "}
       </Typography>
       <Grid container mt={2}>
-        <Grid item xs={12} sm={8} md={6}>
+        <Grid item xs={12} sm={12} md={6}>
           <FormAutoCompleteField
             options={customerCatOptions}
             register={register("customerCategory")}

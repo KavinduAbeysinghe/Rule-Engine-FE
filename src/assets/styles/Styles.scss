@@ -40,10 +40,24 @@
 }
 
 .MuiPaper-root.MuiDrawer-paper {
-  background: linear-gradient(195deg, #42424a, #191919);
+  //background: linear-gradient(195deg, #42424a, #191919);
   //margin: 1rem;
   //border-radius: 17px;
   //height: calc(100vh - 2rem);
+  background-image: url("../images/sidebar.jpg") !important;
+  background-size: cover;
+  background-position: center center;
+}
+
+.sidebar-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(195deg, #42424a, #191919);
+  z-index: -1;
+  opacity: 0.8;
 }
 
 .MuiPaper-root.MuiAccordion-root {
@@ -102,6 +116,12 @@
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px !important;
 }
 
-//.modal {
-//  padding-left: 240;
-//}
+.modal {
+  z-index: 1500 !important;
+}
+
+.sidebar {
+  //background-image: url("../images/sidebar.jpg") !important;
+  //background-size: cover;
+  //background-position: center center;
+}

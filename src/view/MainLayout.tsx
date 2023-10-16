@@ -75,27 +75,33 @@ const MainLayout = () => {
     <Box display={"flex"}>
       <CssBaseline />
       <Sidebar theme={theme} />
-      <Box component={"main"} ml={2} mr={2} mt={2} sx={{ flexGrow: 1, p: 3 }}>
-        <Routes>
-          <Route path={""} element={<LandingPage />} />
-          <Route
-            path={"/search-customer-category"}
-            element={<SearchCustomerCategory />}
-          />
-          <Route path={"/benefit-management"} element={<SearchMainBenefit />} />
-          <Route
-            path={"/benefit-management/sub-benefits/*"}
-            element={<SearchSubBenefit />}
-          />
-          <Route
-            path={"/loan-&-benefit-allocation"}
-            element={<LoanBenefitAllocation />}
-          />
-          <Route
-            path={"/category-identification"}
-            element={<CategoryIdentificationPage />}
-          />
-        </Routes>
+      <Box component={"main"} mt={2} sx={{ flexGrow: 1, overflow: "auto" }}>
+        <Box ml={2} mr={2} p={3} pb={10}>
+          <Routes>
+            <Route path={""} element={<LandingPage />} />
+            <Route
+              path={"/search-customer-category"}
+              element={<SearchCustomerCategory />}
+            />
+            <Route
+              path={"/benefit-management"}
+              element={<SearchMainBenefit />}
+            />
+            <Route
+              path={"/benefit-management/sub-benefits/*"}
+              element={<SearchSubBenefit />}
+            />
+            <Route
+              path={"/loan-&-benefit-allocation"}
+              element={<LoanBenefitAllocation />}
+            />
+            <Route
+              path={"/category-identification"}
+              element={<CategoryIdentificationPage />}
+            />
+          </Routes>
+        </Box>
+        <Footer />
       </Box>
     </Box>
   );
