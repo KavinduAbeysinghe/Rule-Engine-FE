@@ -35,6 +35,8 @@ const BenefitAllocation = ({
 
   const [mainBenefitOptions, setMainBenefitOptions] = useState<Array<any>>([]);
 
+  const [subBenefitsRef, setSubBenefitsRef] = useState<Array<any>>([]);
+
   const [mainBenefits, setMainBenefits] = useState<Array<any>>([]);
 
   const { fields, remove, prepend } = useFieldArray({
@@ -109,8 +111,20 @@ const BenefitAllocation = ({
     }
   };
 
+  const getAllSubBenefits = async () => {
+    try {
+      const res = await axiosInstance.get(`/sub-benefits/get-all-sub-benefits`);
+      if (res?.data?.statusCode === 200) {
+        setSubBenefitsRef(res?.data?.data);
+      }
+    } catch (error: any) {
+      notify.error(error?.response?.data?.message);
+    }
+  };
+
   useEffect(() => {
     getMainBenefits();
+    getAllSubBenefits();
   }, []);
 
   const handleAddMainCat = () => {
@@ -224,6 +238,7 @@ const BenefitAllocation = ({
           mainBenefits={mainBenefits}
           mainBenefitIndex={index}
           removeMainBenefitLimit={remove}
+          subBenefitsRef={subBenefitsRef}
         />
       ))}
       <Box display={"flex"} gap={2} sx={{ mt: 5 }} justifyContent={"center"}>

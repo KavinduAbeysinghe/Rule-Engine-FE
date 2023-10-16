@@ -41,7 +41,9 @@ const CustomerCategoryForm = ({
     categoryName: Yup.string().required(commonError),
     creditScore: Yup.number()
       .required(commonError)
-      .min(0, "Invalid input")
+      .min(1, "Min should be 1")
+      .max(10, "Max should be 10")
+      .integer("Invalid input")
       .typeError(commonError),
     income: Yup.number()
       .required(commonError)

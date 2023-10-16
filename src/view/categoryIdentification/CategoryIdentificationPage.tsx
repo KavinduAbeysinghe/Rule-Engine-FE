@@ -20,9 +20,9 @@ const CategoryIdentificationPage = () => {
   const tableHeaders = [
     "Loan Code",
     "Loan Description",
-    "Loan Amount",
+    "Loan Amount (Rs)",
     "Limit Validity",
-    "Interest Rate",
+    "Interest Rate (%)",
     "Interest Rate Validity",
   ];
 
@@ -56,7 +56,9 @@ const CategoryIdentificationPage = () => {
   const validationSchema = Yup.object().shape({
     creditScore: Yup.number()
       .nullable()
-      .min(0, "Input input")
+      .min(1, "Min should be 1")
+      .max(10, "Max should be 10")
+      .integer("Invalid input")
       .typeError(commonError),
     income: Yup.number()
       .nullable()
@@ -95,8 +97,43 @@ const CategoryIdentificationPage = () => {
       if (res?.data?.statusCode === 200) {
         const data = res?.data?.data;
         setCategoryTitle(`${data?.categoryCode} - ${data?.categoryName}`);
-        await getLoans(res?.data?.data?.categoryId);
-        await getBenefits(res?.data?.data?.categoryId);
+        const activeLoans = data?.loans?.filter((dta: any) => dta?.isActive);
+        setLoanData(
+          activeLoans?.map((d: any) => ({
+            loanId: d?.loanId,
+            loanCode: d?.loanCode,
+            loanDescription: d?.loanDescription,
+            loanAmount: d?.loanAmount,
+            limitValidityPeriod:
+              d?.isLimitValidityDays && !d?.isLimitValidityMonth
+                ? `${d?.limitValidityPeriod} Days`
+                : !d?.isLimitValidityDays && d?.isLimitValidityMonth
+                ? `${d?.limitValidityPeriod} Months`
+                : "",
+            interestRate: d?.interestRate,
+            interestRateValidityPeriod:
+              d?.isInterestRateValidityDays && !d?.isInterestRateValidityMonth
+                ? `${d?.interestRateValidityPeriod} Days`
+                : !d?.isInterestRateValidityDays &&
+                  d?.isInterestRateValidityMonth
+                ? `${d?.interestRateValidityPeriod} Months`
+                : "",
+          })),
+        );
+        setBenefitData(
+          data?.benefitLimits?.map((d: any) => ({
+            benefitLimitId: d?.benefitLimitId,
+            mainBenefitCode: d?.mainBenefitCode,
+            mainBenefitName: d?.mainBenefitName,
+            maxAllowedLimit: d?.maxAllowedLimit,
+            benefitSubLimits: d?.benefitSubLimits?.map((l: any) => ({
+              benefitSubLimitId: l?.benefitSubLimitId,
+              subBenefitCode: l?.subBenefitCode,
+              subBenefitName: l?.subBenefitName,
+              maxAllowedSubLimit: l?.maxAllowedSubLimit,
+            })),
+          })),
+        );
       }
     } catch (error: any) {
       if (
@@ -120,75 +157,6 @@ const CategoryIdentificationPage = () => {
     setBenefitData([]);
   };
 
-  const getLoans = async (categoryId: any) => {
-    if (categoryId) {
-      try {
-        const res = await axiosInstance.get(
-          `/get-loans-by-cat-id/${categoryId}`,
-        );
-        if (res?.data?.statusCode === 200) {
-          const activeLoans = res?.data?.data?.filter(
-            (dta: any) => dta?.isActive,
-          );
-          setLoanData(
-            activeLoans?.map((d: any) => ({
-              loanId: d?.loanId,
-              loanCode: d?.loanCode,
-              loanDescription: d?.loanDescription,
-              loanAmount: d?.loanAmount,
-              limitValidityPeriod:
-                d?.isLimitValidityDays && !d?.isLimitValidityMonth
-                  ? `${d?.limitValidityPeriod} Days`
-                  : !d?.isLimitValidityDays && d?.isLimitValidityMonth
-                  ? `${d?.limitValidityPeriod} Months`
-                  : "",
-              interestRate: d?.interestRate,
-              interestRateValidityPeriod:
-                d?.isInterestRateValidityDays && !d?.isInterestRateValidityMonth
-                  ? `${d?.interestRateValidityPeriod} Days`
-                  : !d?.isInterestRateValidityDays &&
-                    d?.isInterestRateValidityMonth
-                  ? `${d?.interestRateValidityPeriod} Months`
-                  : "",
-            })),
-          );
-        }
-      } catch (error: any) {
-        notify.error(error?.response?.data?.message);
-      }
-    }
-  };
-
-  const getBenefits = async (categoryId: any) => {
-    if (categoryId) {
-      try {
-        const res = await axiosInstance.get(
-          `/benefit-limits/get-benefit-limits-by-cat-id/${categoryId}`,
-        );
-        if (res?.data?.statusCode === 200) {
-          const data = res?.data?.data;
-          setBenefitData(
-            data?.map((d: any) => ({
-              benefitLimitId: d?.benefitLimitId,
-              mainBenefitCode: d?.mainBenefitCode,
-              mainBenefitName: d?.mainBenefitName,
-              maxAllowedLimit: d?.maxAllowedLimit,
-              benefitSubLimits: d?.benefitSubLimits?.map((l: any) => ({
-                benefitSubLimitId: l?.benefitSubLimitId,
-                subBenefitCode: l?.subBenefitCode,
-                subBenefitName: l?.subBenefitName,
-                maxAllowedSubLimit: l?.maxAllowedSubLimit,
-              })),
-            })),
-          );
-          console.log(data);
-        }
-      } catch (error: any) {
-        notify.error(error?.response?.data?.message);
-      }
-    }
-  };
-
   return (
     <>
       <Backdrop
@@ -204,7 +172,7 @@ const CategoryIdentificationPage = () => {
       <h2 className={"landing-heading"}>Category Identification</h2>
       <hr />
       <Grid container spacing={2} mt={5}>
-        <Grid item md={3}>
+        <Grid item sm={6} md={3}>
           <FormTextField
             label={"Credit Score"}
             register={register("creditScore")}
@@ -216,7 +184,7 @@ const CategoryIdentificationPage = () => {
             inputProps={{ min: 0 }}
           />
         </Grid>
-        <Grid item md={3}>
+        <Grid item sm={6} md={3}>
           <FormTextField
             label={"Income"}
             register={register("income")}
@@ -231,7 +199,7 @@ const CategoryIdentificationPage = () => {
             }}
           />
         </Grid>
-        <Grid item md={2}>
+        <Grid item sm={6} md={2}>
           <FormSwitchField
             name={"isAgeGreaterThan18"}
             label={"Age Greater Than 18"}
@@ -242,7 +210,7 @@ const CategoryIdentificationPage = () => {
             setValue={() => setValue}
           />
         </Grid>
-        <Grid item md={2}>
+        <Grid item sm={6} md={2}>
           <FormSwitchField
             name={"isSpecializedCustomer"}
             label={"Specialized Customer"}
@@ -254,17 +222,17 @@ const CategoryIdentificationPage = () => {
           />
         </Grid>
         <Grid item md={1}>
-          <Button variant={"outlined"} size={"small"} onClick={clearForm}>
-            Clear
-          </Button>
-        </Grid>
-        <Grid item md={1}>
           <Button
             variant={"contained"}
             size={"small"}
             onClick={handleSubmit(handleSearch)}
           >
             Search
+          </Button>
+        </Grid>
+        <Grid item md={1}>
+          <Button variant={"outlined"} size={"small"} onClick={clearForm}>
+            Clear
           </Button>
         </Grid>
       </Grid>

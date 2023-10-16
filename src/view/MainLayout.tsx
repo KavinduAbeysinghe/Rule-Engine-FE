@@ -1,12 +1,14 @@
 import { Route, Routes } from "react-router-dom";
 import SearchCustomerCategory from "./customerCategory/SearchCustomerCategory";
-import { Box, Grid } from "@mui/material";
+import { Box, CssBaseline, Grid, useTheme } from "@mui/material";
 import LandingPageCard from "../components/cards/LandingPageCard";
 import SearchMainBenefit from "./benefitManagement/mainBenefit/SearchMainBenefit";
 import SearchSubBenefit from "./benefitManagement/mainBenefit/SearchSubBenefit";
 import LoanBenefitAllocation from "./loan&BenefitAllocation/Loan&BenefitAllocation";
 import CategoryIdentificationPage from "./categoryIdentification/CategoryIdentificationPage";
 import React from "react";
+import Sidebar from "../components/navbar/Sidebar";
+import Footer from "../components/footer/Footer";
 
 const landingPageCards: any[] = [
   {
@@ -67,28 +69,34 @@ const LandingPage = () => {
 };
 
 const MainLayout = () => {
+  const theme = useTheme();
+
   return (
-    <Box ml={34} mr={5} mt={5} pb={10}>
-      <Routes>
-        <Route path={""} element={<LandingPage />} />
-        <Route
-          path={"/search-customer-category"}
-          element={<SearchCustomerCategory />}
-        />
-        <Route path={"/benefit-management"} element={<SearchMainBenefit />} />
-        <Route
-          path={"/benefit-management/sub-benefits/*"}
-          element={<SearchSubBenefit />}
-        />
-        <Route
-          path={"/loan-&-benefit-allocation"}
-          element={<LoanBenefitAllocation />}
-        />
-        <Route
-          path={"/category-identification"}
-          element={<CategoryIdentificationPage />}
-        />
-      </Routes>
+    <Box display={"flex"}>
+      <CssBaseline />
+      <Sidebar theme={theme} />
+      <Box component={"main"} ml={2} mr={2} mt={2} sx={{ flexGrow: 1, p: 3 }}>
+        <Routes>
+          <Route path={""} element={<LandingPage />} />
+          <Route
+            path={"/search-customer-category"}
+            element={<SearchCustomerCategory />}
+          />
+          <Route path={"/benefit-management"} element={<SearchMainBenefit />} />
+          <Route
+            path={"/benefit-management/sub-benefits/*"}
+            element={<SearchSubBenefit />}
+          />
+          <Route
+            path={"/loan-&-benefit-allocation"}
+            element={<LoanBenefitAllocation />}
+          />
+          <Route
+            path={"/category-identification"}
+            element={<CategoryIdentificationPage />}
+          />
+        </Routes>
+      </Box>
     </Box>
   );
 };
