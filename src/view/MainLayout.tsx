@@ -78,7 +78,7 @@ const MainLayout = () => {
       <Box component={"main"} mt={2} sx={{ flexGrow: 1, overflow: "auto" }}>
         <Box ml={2} mr={2} p={3} pb={10}>
           <Routes>
-            <Route path={""} element={<LandingPage />} />
+            <Route path={"/"} element={<LandingPage />} />
             <Route
               path={"/search-customer-category"}
               element={<SearchCustomerCategory />}
